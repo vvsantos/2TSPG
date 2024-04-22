@@ -4,10 +4,11 @@ CREATE TABLE PRODUTO2 (ID NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
                     MARCAR VARCHAR2(30));
                     
                     
-DECLARE
-    v_nome   produto2.nome%TYPE := 'MOUSE';
-    v_tipo   produto2.tipo%TYPE := 'PERIFERICO';
-    v_marcar produto2.maRcar%TYPE:= 'DELL';
+CREATE OR REPLACE PROCEDURE SP_INSERT_PRODUTO(
+    v_nome   produto2.nome%TYPE,
+    v_tipo   produto2.tipo%TYPE,
+    v_marcar produto2.maRcar%TYPE) 
+    AS 
 BEGIN
     INSERT INTO produto2 (
         nome,
@@ -20,6 +21,14 @@ BEGIN
     );
 
     COMMIT;
-END;
+END c;
+
+
+select * from produto2
+
+call SP_INSERT_PRODUTO ('teclado','periferico','HP');
+exec SP_INSERT_PRODUTO ('teclado','periferico','HP');
+execute SP_INSERT_PRODUTO ('teclado','periferico','HP');
+
 
 
